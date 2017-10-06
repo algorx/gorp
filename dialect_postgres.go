@@ -30,10 +30,15 @@ func (d PostgresDialect) ToSqlType(val reflect.Type, maxsize int, isAutoIncr boo
 		return d.ToSqlType(val.Elem(), maxsize, isAutoIncr)
 	case reflect.Bool:
 		return "boolean"
-	case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Uint, reflect.Uint8, reflect.Uint16, reflect.Uint32:
+	case reflect.Int8, reflect.Uint8:
 		if isAutoIncr {
 			return "serial"
 		}
+		return "smallint"
+	case reflect.Int, reflect.Int16, reflect.Int32, reflect.Uint, reflect.Uint16, reflect.Uint32:
+		if isAutoIncr {
+			return "serial"
+		}		
 		return "integer"
 	case reflect.Int64, reflect.Uint64:
 		if isAutoIncr {
