@@ -465,7 +465,7 @@ func (m *DbMap) dropTables(addIfExists bool) (err error) {
 func (m *DbMap) dropTable(t reflect.Type, name string, addIfExists bool) error {
 	table := tableOrNil(m, t, name)
 	if table == nil {
-		return fmt.Errorf("table %s was not registered", table.TableName)
+		return fmt.Errorf("table %s was not registered", name)
 	}
 
 	return m.dropTableImpl(table, addIfExists)
